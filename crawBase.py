@@ -6,15 +6,9 @@
 # @File    : crawBase.py
 # @Software: PyCharm
 
-import random
-import requests
-import time
-import log
-import logging
-log.initLogConf()
-logg = logging.getLogger(__file__)
-
-
+from common_import import *
+from log import *
+logg= logging.getLogger(__file__)
 
 class CrawBase:
     '''

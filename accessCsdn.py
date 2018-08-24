@@ -5,11 +5,10 @@
 # @Desc    : 
 # @File    : aceessCsdn.py
 # @Software: PyCharm
-from lxml import etree
-import crawBase
-import time
 
-class AccessCsdn(crawBase.CrawBase):
+from crawBase import *
+
+class AccessCsdn(CrawBase):
     '''
     访问csdn
     '''

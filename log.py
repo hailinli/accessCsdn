@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 18/6/11 下午1:10
+# @Time    : 18/8/25 上午12:19
 # @Author  : Lihailin<415787837@qq.com>
 # @Desc    : 
 # @File    : log.py
 # @Software: PyCharm
 
-import os
-import datetime
-import logging
-import logging.config
+import conf
+from common_import import *
 
 def genLogDict(logDir, logFile):
     '''
@@ -43,17 +41,9 @@ def genLogDict(logDir, logFile):
                 'mode': 'w+',
                 "maxBytes": 1024*1024*5,  # 5 MB
                 "backupCount": 20,
-                "encoding": "utf8"
+                "encoding": "utf-8"
             },
         },
-
-        # "loggers": {
-        #     "app_name": {
-        #         "level": "INFO",
-        #         "handlers": ["console"],
-        #         "propagate": "no"
-        #     }
-        # },
 
         "root": {
             'handlers': ['default'],
@@ -65,19 +55,20 @@ def genLogDict(logDir, logFile):
 
 
 def initLogConf():
-    """
-    配置日志
-    """
+    '''
+    配置日志,初始化设置
+    '''
+    # 生成日志路径
     baseDir = os.path.dirname(os.path.abspath(__file__))
-    logDir = os.path.join(baseDir, "logs")
-    if not os.path.exists(logDir):
-        os.makedirs(logDir)  # 创建路径
+    logDir = os.path.join(baseDir, conf.LOG_PATH)
 
+    # 创建路径
+    if not os.path.exists(logDir):
+        os.makedirs(logDir)
+
+    # 生成日志文件
     logFile = datetime.datetime.now().strftime("%Y-%m-%d") + ".log"
     logDict = genLogDict(logDir, logFile)
     logging.config.dictConfig(logDict)
 
-if __name__ == '__main__':
-    initLogConf()
-    log = logging.getLogger(__file__)
-    log.info("log B")
+initLogConf()
